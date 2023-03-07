@@ -9,12 +9,12 @@
 				v-for="(item2, index1) in item"
 				:key="index1"
 				v-show="!this.middlePiece(item2.x, item2.y)"
-				v-on:click="this.placePiece(item2.y, item2.x)"
+				v-on:click="this.placePiece(item2.y, item2.x, this.square)"
 				class="-mx-6 -my-6"
 			>
 				<GamePiece
 					v-on:click="this.removePiece(item2.x, item2.y, this.square)"
-					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square, this)"
+					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square)"
 					v-show="item2.player"
 					:class="{ 'bg-red-500': item2.player === 2 }"
 				>
@@ -41,6 +41,7 @@ export default {
 			numOfTurns: "",
 			x: 0,
 			y: 0,
+			lockedThrees: [],
 		};
 	},
 	computed: {
@@ -49,119 +50,15 @@ export default {
 		},
 	},
 	methods: {
-		placePiece(y, x, a) {
-			if (
-				this.boardStore.removePieceOfPlayer !== 0 ||
-				this.boardStore.getPhase !== 1 ||
-				this.board[y][x].player !== 0 ||
-				this.board[y][x].player != ""
-			) {
-			} else if (a) {
-				this.board[y][x].player = 0;
-			} else {
-				this.board[y][x].player = this.boardStore.getTurn;
-				this.boardStore.changeTurn();
-			}
+		placePiece(y, x, sq) {
+			this.boardStore.placePiece(y, x, sq);
 		},
-		moveLeft(x, y, square) {
-			let player = this.board[y][x].player;
-			this.board[y][x].player = 0;
-			if (y === 1) {
-				if (x === 2) {
-					this.boardStore.moveBetweenSquares(square + 1, x, y, player);
-				} else {
-					this.boardStore.moveBetweenSquares(square - 1, x, y, player);
-				}
-			} else {
-				this.board[y][x - 1].player = player;
-				this.boardStore.changeTurn();
-			}
-		},
-		moveRight(x, y, square) {
-			let player = this.board[y][x].player;
-			this.board[y][x].player = 0;
-			if (y === 1) {
-				if (x === 2) {
-					this.boardStore.moveBetweenSquares(square - 1, x, y, player);
-				} else {
-					this.boardStore.moveBetweenSquares(square + 1, x, y, player);
-				}
-			} else {
-				this.board[y][x + 1].player = player;
-				this.boardStore.changeTurn();
-			}
-		},
-		moveUp(x, y, square) {
-			let player = this.board[y][x].player;
-			this.board[y][x].player = 0;
-			if (x === 1) {
-				if (y === 2) {
-					this.boardStore.moveBetweenSquares(square + 1, x, y, player);
-				} else {
-					this.boardStore.moveBetweenSquares(square - 1, x, y, player);
-				}
-			} else {
-				this.board[y - 1][x].player = player;
-				this.boardStore.changeTurn();
-			}
-		},
-		moveDown(x, y, square) {
-			let player = this.board[y][x].player;
-			this.board[y][x].player = 0;
-			if (x === 1) {
-				if (y === 2) {
-					this.boardStore.moveBetweenSquares(square - 1, x, y, player);
-				} else {
-					this.boardStore.moveBetweenSquares(square + 1, x, y, player);
-				}
-			} else {
-				this.board[y + 1][x].player = player;
-				this.boardStore.changeTurn();
-			}
-		},
-		movePiece(x, y, square, thiss, ref) {
-			return function (direction, mouseEvent) {
-				if (
-					(((x === 0 && direction === "left") ||
-						(x === 2 && direction === "right")) &&
-						square === 0) ||
-					(((y === 0 && direction === "top") ||
-						(y === 2 && direction === "bottom")) &&
-						square === 0) ||
-					(((x === 0 && direction === "right") ||
-						(x === 2 && direction === "left")) &&
-						y === 1 &&
-						square === 2) ||
-					thiss.boardStore.removePieceOfPlayer !== 0
-				) {
-				} else {
-					switch (direction) {
-						case "left":
-							thiss.moveLeft(x, y, square);
-							break;
-						case "right":
-							thiss.moveRight(x, y, square);
-							break;
-						case "top":
-							thiss.moveUp(x, y, square);
-							break;
-						case "bottom":
-							thiss.moveDown(x, y, square);
-							break;
-					}
-				}
-			};
+		movePiece(x, y, square, ref) {
+			return this.boardStore.movePiece(x, y, square, ref);
 		},
 		removePiece(x, y, sq) {
-			let beforeRemove = this.boardStore.removePieceOfPlayer;
-			if (
-				this.board[y][x].player === beforeRemove &&
-				this.board[y][x].player !== 0
-			) {
-				this.boardStore.prevRemove = beforeRemove;
-				this.boardStore.resetRemove();
-				this.board[y][x].player = 0;
-			}
+			console.log("REMOVED");
+			this.boardStore.removePieceOfPlayer = 0;
 		},
 		middlePiece(y, x) {
 			if (x === 1 && y === 1) {
@@ -177,15 +74,26 @@ export default {
 		this.watcher = this.boardStore.$subscribe(
 			() => {
 				this.numOfTurns = this.boardStore.getNumOfTurns;
+				this.lockedThrees = this.boardStore.lockedThrees;
 				//this.boardAll = this.boardStore.board;
 			},
 			{ detached: false }
 		);
 	},
 	watch: {
-		numOfTurns(val) {
+		numOfTurns(val, a) {
 			if (val == 18) {
 				this.boardStore.phase = 2;
+			}
+		},
+		lockedThrees(newVal, oldVal) {
+			for (let i in newVal) {
+				if (
+					newVal.length > oldVal.length ||
+					newVal[i].length > oldVal[i].length
+				) {
+					this.boardStore.removePieceOfPlayer = this.boardStore.turn;
+				}
 			}
 		},
 		// boardAll() {
