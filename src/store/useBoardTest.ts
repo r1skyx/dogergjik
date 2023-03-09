@@ -293,9 +293,9 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			let moveUp = this.moveUp;
 			let moveDown = this.moveDown;
 			return function (direction, mouseEvent) {
-				// if (this.removePieceOfPlayer !== 0) {
-				// 	return;
-				// }
+				if (this.removePieceOfPlayer !== 0) {
+					return;
+				}
 				if (
 					(((x === 0 && direction === "left") ||
 						(x === 2 && direction === "right")) &&
@@ -327,9 +327,6 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			};
 		},
 
-		checkForRow(a) {
-			console.log(a);
-		},
 		checkForThreeRowColInSquares(board) {
 			let innerLockedThreesSquare = [];
 			let innerLockedAllSquares = [];
@@ -442,14 +439,8 @@ export const useBoardTestStore = defineStore("BoardTest", {
 					innerLockedAllSquares.push(innerLockedThreesSquare);
 				}
 			}
-			// if (inARowPlayer1) {
-			console.log(inARowPlayer1);
-			// }
 			this.lockedThrees = [];
 			this.lockedThrees = [...innerLockedAllSquares];
-		},
-		compareArrays(a, b) {
-			return JSON.stringify(a) === JSON.stringify(b);
 		},
 	},
 });
