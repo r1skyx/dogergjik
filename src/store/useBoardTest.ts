@@ -330,13 +330,17 @@ export const useBoardTestStore = defineStore("BoardTest", {
 		checkForRow(a) {
 			console.log(a);
 		},
-		checkForThreeRowColInSquare(board) {
+		checkForThreeRowColInSquares(board) {
 			let innerLockedThreesSquare = [];
 			let innerLockedAllSquares = [];
 			let inARowPlayer1 = [];
 			let inARowPlayer2 = [];
 			let inAColPlayer1 = [];
 			let inAColPlayer2 = [];
+			let transSquareCol1 = [[], []];
+			let transSquareCol2 = [[], []];
+			let transSquareRow1 = [[], []];
+			let transSquareRow2 = [[], []];
 			for (let square of board) {
 				for (let y = 0; y <= 2; y++) {
 					inARowPlayer1 = [];
@@ -344,6 +348,7 @@ export const useBoardTestStore = defineStore("BoardTest", {
 					inAColPlayer1 = [];
 					inAColPlayer2 = [];
 					for (let x = 0; x <= 2; x++) {
+						//This is for inside one square
 						let playerInPosRow = square[y][x].player;
 						if (playerInPosRow) {
 							switch (playerInPosRow) {
@@ -370,6 +375,41 @@ export const useBoardTestStore = defineStore("BoardTest", {
 									break;
 							}
 						}
+
+						/* this part is for 3s in col between different squares */
+						if (y === 1 && (x === 0 || x === 2)) {
+							let playerInPosColTrans = square[y][x].player;
+							if (playerInPosColTrans) {
+								switch (playerInPosColTrans) {
+									case 0:
+										break;
+									case 1:
+										console.log(transSquareCol1[x == 2 ? 1 : 0]);
+										transSquareCol1[x == 2 ? 1 : 0].push(square[y][x]);
+										break;
+									case 2:
+										transSquareCol2[x === 2 ? 1 : 0].push(square[y][x]);
+										break;
+								}
+							}
+						}
+						//3s row different squares
+						else if (x === 1 && (y === 0 || y === 2)) {
+							let playerInPosRowTrans = square[y][x].player;
+							if (playerInPosRowTrans) {
+								switch (playerInPosRowTrans) {
+									case 0:
+										break;
+									case 1:
+										console.log(transSquareRow1[y === 2 ? 1 : 0]);
+										transSquareRow1[y === 2 ? 1 : 0].push(square[y][x]);
+										break;
+									case 2:
+										transSquareRow2[y === 2 ? 1 : 0].push(square[y][x]);
+										break;
+								}
+							}
+						}
 					}
 					if (inARowPlayer1.length === 3) {
 						innerLockedThreesSquare.push(inARowPlayer1);
@@ -384,11 +424,27 @@ export const useBoardTestStore = defineStore("BoardTest", {
 						innerLockedThreesSquare.push(inAColPlayer2);
 					}
 				}
+				//condition for trans-sqaure cols
+				if (transSquareCol1[0].length === 3) {
+					innerLockedThreesSquare.push(transSquareCol1[0]);
+				}
+				if (transSquareCol1[1].length === 3) {
+					innerLockedThreesSquare.push(transSquareCol1[1]);
+				}
+				if (transSquareRow1[0].length === 3) {
+					innerLockedThreesSquare.push(transSquareRow1[0]);
+				}
+				if (transSquareRow2[1].length === 3) {
+					innerLockedThreesSquare.push(transSquareRow1[1]);
+				}
 				if (innerLockedThreesSquare.length === 0) {
 				} else {
 					innerLockedAllSquares.push(innerLockedThreesSquare);
 				}
 			}
+			// if (inARowPlayer1) {
+			console.log(inARowPlayer1);
+			// }
 			this.lockedThrees = [];
 			this.lockedThrees = [...innerLockedAllSquares];
 		},

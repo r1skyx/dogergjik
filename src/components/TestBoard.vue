@@ -41,7 +41,7 @@ export default {
 	watch: {
 		numOfTurns(newVal, oldVal) {
 			if (newVal > oldVal) {
-				this.boardStore.checkForThreeRowColInSquare(this.board);
+				this.boardStore.checkForThreeRowColInSquares(this.board);
 			}
 		},
 	},
