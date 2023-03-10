@@ -1,6 +1,11 @@
 import { defineStore } from "pinia";
 import { toRefs } from "vue";
 import Fuse from "fuse.js";
+import _pick from "lodash.pick";
+const defaultState = {
+	removePieceOfPlayer: 0,
+};
+
 export const useBoardTestStore = defineStore("BoardTest", {
 	state: () => ({
 		board: [
@@ -195,8 +200,8 @@ export const useBoardTestStore = defineStore("BoardTest", {
 		numOfTurns: 0,
 		phase: 1,
 		square: 0,
-		removePieceOfPlayer: 0,
 		lockedThrees: "",
+		...defaultState,
 	}),
 	getters: {
 		getBoard: (state) => state.board,
@@ -206,6 +211,12 @@ export const useBoardTestStore = defineStore("BoardTest", {
 		getPhase: (state) => state.phase,
 	},
 	actions: {
+		reset(keys) {
+			Object.assign(
+				this,
+				keys?.length ? _pick(defaultState, keys) : defaultState // if no keys provided, reset all
+			);
+		},
 		changeTurn() {
 			if (this.turn == 1) {
 				this.turn = 2;
@@ -232,6 +243,13 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			}
 		},
 		moveLeft(x, y, square) {
+			if (
+				this.removePieceOfPlayer !== 0 ||
+				this.board[square][y][x].player !== this.turn ||
+				this.phase === 1
+			) {
+				return;
+			}
 			let player = this.board[square][y][x].player;
 			this.board[square][y][x].player = 0;
 			if (y === 1) {
@@ -246,6 +264,13 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			this.changeTurn();
 		},
 		moveRight(x, y, square) {
+			if (
+				this.removePieceOfPlayer !== 0 ||
+				this.board[square][y][x].player !== this.turn ||
+				this.phase === 1
+			) {
+				return;
+			}
 			let player = this.board[square][y][x].player;
 			this.board[square][y][x].player = 0;
 			if (y === 1) {
@@ -260,6 +285,13 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			this.changeTurn();
 		},
 		moveUp(x, y, square) {
+			if (
+				this.removePieceOfPlayer !== 0 ||
+				this.board[square][y][x].player !== this.turn ||
+				this.phase === 1
+			) {
+				return;
+			}
 			let player = this.board[square][y][x].player;
 			this.board[square][y][x].player = 0;
 			if (x === 1) {
@@ -274,6 +306,13 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			this.changeTurn();
 		},
 		moveDown(x, y, square) {
+			if (
+				this.removePieceOfPlayer !== 0 ||
+				this.board[square][y][x].player !== this.turn ||
+				this.phase === 1
+			) {
+				return;
+			}
 			let player = this.board[square][y][x].player;
 			this.board[square][y][x].player = 0;
 			if (x === 1) {
@@ -287,26 +326,36 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			}
 			this.changeTurn();
 		},
+
+		removePiece(x, y, sq) {
+			console.log(this.board[sq][y][x].player);
+			if (this.removePieceOfPlayer !== 0) {
+				this.board[sq][y][x].player = 0;
+				this.removePieceOfPlayer = 0;
+			}
+		},
 		movePiece(x, y, square, ref) {
 			let moveLeft = this.moveLeft;
 			let moveRight = this.moveRight;
 			let moveUp = this.moveUp;
 			let moveDown = this.moveDown;
 			return function (direction, mouseEvent) {
-				if (this.removePieceOfPlayer !== 0) {
-					return;
-				}
 				if (
 					(((x === 0 && direction === "left") ||
 						(x === 2 && direction === "right")) &&
 						square === 0) ||
-					(((y === 0 && direction === "top") ||
-						(y === 2 && direction === "bottom")) &&
-						square === 0) ||
 					(((x === 0 && direction === "right") ||
 						(x === 2 && direction === "left")) &&
 						y === 1 &&
-						square === 2)
+						square === 2) ||
+					(((y === 0 && direction === "top") ||
+						(y === 2 && direction === "bottom")) &&
+						square === 0) ||
+					(((y === 0 && x === 1 && direction === "bottom") ||
+						(y === 2 && x === 1 && direction === "top")) &&
+						square === 2) ||
+					(y === 2 && (x === 0 || x === 2) && direction === "bottom") ||
+					(y === 0 && (x === 0 || x === 2) && direction === "top")
 				) {
 				} else {
 					switch (direction) {
@@ -441,6 +490,9 @@ export const useBoardTestStore = defineStore("BoardTest", {
 			}
 			this.lockedThrees = [];
 			this.lockedThrees = [...innerLockedAllSquares];
+		},
+		compareArrays(a, b) {
+			return JSON.stringify(a) === JSON.stringify(b);
 		},
 	},
 });

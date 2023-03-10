@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "fuse.js": "^6.6.2",
+    "lodash": "^4.17.21",
+    "lodash.pick": "^4.4.0",
     "pinia": "^2.0.32",
     "vue": "^3.2.45",
     "vue3-touch-events": "^4.1.2"

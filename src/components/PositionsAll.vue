@@ -13,12 +13,14 @@
 				class="-mx-6 -my-6"
 			>
 				<GamePiece
-					v-on:click="this.removePiece(item2.x, item2.y, this.square)"
 					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square)"
 					v-show="item2.player"
 					:class="{ 'bg-red-500': item2.player === 2 }"
 				>
-					<h1 v-show="this.boardStore.removePieceOfPlayer === item2.player">
+					<h1
+						v-on:click="this.removePiece(item2.x, item2.y, this.square)"
+						v-show="this.boardStore.removePieceOfPlayer === item2.player"
+					>
 						X
 					</h1>
 				</GamePiece>
@@ -53,12 +55,14 @@ export default {
 		placePiece(y, x, sq) {
 			this.boardStore.placePiece(y, x, sq);
 		},
-		movePiece(x, y, square, ref) {
-			return this.boardStore.movePiece(x, y, square, ref);
+		movePiece(x, y, square, removePiece, ref) {
+			return this.boardStore.movePiece(x, y, square, removePiece, ref);
 		},
 		removePiece(x, y, sq) {
-			console.log("REMOVED");
-			this.boardStore.removePieceOfPlayer = 0;
+			this.boardStore.board[sq][y][x].player = 0;
+			setTimeout(() => {
+				this.boardStore.reset(["removePieceOfPlayer"]);
+			}, "100");
 		},
 		middlePiece(y, x) {
 			if (x === 1 && y === 1) {
@@ -75,7 +79,7 @@ export default {
 			() => {
 				this.numOfTurns = this.boardStore.getNumOfTurns;
 				this.lockedThrees = this.boardStore.lockedThrees;
-				//this.boardAll = this.boardStore.board;
+				this.boardAll = this.boardStore.board;
 			},
 			{ detached: false }
 		);
@@ -87,18 +91,16 @@ export default {
 			}
 		},
 		lockedThrees(newVal, oldVal) {
-			for (let i in newVal) {
-				if (
-					newVal.length > oldVal.length ||
-					newVal[i].length > oldVal[i].length
-				) {
-					this.boardStore.removePieceOfPlayer = this.boardStore.turn;
-				}
+			if (
+				JSON.stringify(newVal).length > JSON.stringify(oldVal).length &&
+				this.boardStore.removePieceOfPlayer === 0
+			) {
+				this.boardStore.removePieceOfPlayer = this.boardStore.turn;
 			}
 		},
-		// boardAll() {
-		// 	this.boardAll = this.boardStore.board;
-		// },
+		boardAll() {
+			this.boardAll = this.boardStore.board;
+		},
 	},
 };
 </script>
