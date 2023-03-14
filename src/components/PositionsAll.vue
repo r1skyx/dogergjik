@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col justify-between h-full w-full">
 		<div
-			class="flex flex-row justify-between"
+			class="flex flex-row justify-between -m-1"
 			v-for="(item, index) in board"
 			:key="index"
 		>
@@ -15,7 +15,16 @@
 				<GamePiece
 					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square)"
 					v-show="item2.player"
-					:class="{ 'bg-red-500': item2.player === 2 }"
+					:class="{
+						'bg-red-500': item2.player === 2,
+						'border-orange-300 border-solid border-4':
+							(this.boardStore.allowJumpP2 &&
+								this.boardStore.turn === 2 &&
+								item2.player === 2) ||
+							(this.boardStore.allowJumpP1 &&
+								this.boardStore.turn === 1 &&
+								item2.player === 1),
+					}"
 				>
 					<h1
 						v-on:click="this.removePiece(item2.x, item2.y, this.square)"
@@ -31,7 +40,7 @@
 
 <script>
 import PositionPlace from "./PositionPlace.vue";
-import { useBoardTestStore } from "../store/useBoardTest";
+import { useBoardStore } from "../store/useBoard";
 import GamePiece from "./GamePiece.vue";
 export default {
 	name: "PositionAll",
@@ -62,6 +71,7 @@ export default {
 			this.boardStore.board[sq][y][x].player = 0;
 			setTimeout(() => {
 				this.boardStore.reset(["removePieceOfPlayer"]);
+				this.boardStore.checkForThreePiecesLeft(this.boardAll);
 			}, "100");
 		},
 		middlePiece(y, x) {
@@ -71,7 +81,7 @@ export default {
 		},
 	},
 	created() {
-		this.boardStore = useBoardTestStore();
+		this.boardStore = useBoardStore();
 		this.square = this.boardStore.getSquare;
 		this.boardAll = this.boardStore.board;
 		this.boardStore.incrementSquare();

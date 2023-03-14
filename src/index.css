@@ -1,4 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Neucha&display=swap");
+
 /* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* COLORS */
+
+:root {
+	--primary: #d4a373;
+	--secondary: #fefae0;
+	--green: #ccd5ae;
+}
+
+* {
+	font-family: "Neucha", cursive;
+}
+
+html {
+	font-size: 18px;
+}
+
+body {
+	background-color: var(--green);
+}
+
+/* BACKGROUND CLASSES */
+
+.bg-primary {
+	background-color: var(--primary);
+}
+
+.bg-secondary {
+	background-color: var(--secondary);
+}
+
+.bg-green-my {
+	background-color: var(--green);
+}
+
+/* BORDER */
+
+.border-primary {
+	border-color: var(--primary);
+}
+
+.border-primary-dashed {
+	background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%23D4A373FF' stroke-width='4' stroke-dasharray='10' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
+	border-radius: 10px;
+}
+
+.border-secondary {
+	border-color: var(--secondary);
+}
+
+.border-green-my {
+	border-color: var(--green);
+}
+
+/* TEXT */
+
+.txt-primary {
+	color: var(--primary);
+}
+
+.txt-secondary {
+	color: var(--secondary);
+}
+
+.txt-green-my {
+	color: var(--green);
+}

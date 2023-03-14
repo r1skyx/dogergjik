@@ -1,12 +1,12 @@
 <template>
-	<button class="w-12 h-12 rounded-full bg-black relative z-20">
+	<button class="w-12 h-12 rounded-full bg-secondary relative z-20">
 		<slot></slot>
 	</button>
 </template>
 
 <script>
 import GamePiece from "./GamePiece.vue";
-import { useBoardTestStore } from "../store/useBoardTest";
+import { useBoardStore } from "../store/useBoard";
 export default {
 	name: "PositionPlace",
 	components: { GamePiece },
@@ -14,7 +14,7 @@ export default {
 		return {};
 	},
 	created() {
-		this.boardStore = useBoardTestStore();
+		this.boardStore = useBoardStore();
 		this.board = this.boardStore.board;
 	},
 };

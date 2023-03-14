@@ -1,10 +1,11 @@
 <script setup>
-import TestBoard from "./components/TestBoard.vue";
+import GameBoard from "./components/GameBoard.vue";
+import StartMenu from "./components/StartMenu/StartMenu.vue";
 </script>
 
 <template>
 	<div class="h-screen flex align-middle">
-		<TestBoard class="m-auto text-center" />
+		<router-view></router-view>
 	</div>
 </template>
 

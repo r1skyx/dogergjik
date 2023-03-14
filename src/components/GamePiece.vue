@@ -1,12 +1,12 @@
 <script>
-import { useBoardTestStore } from "../store/useBoardTest";
+import { useBoardStore } from "../store/useBoard";
 export default {
 	name: "GamePiece",
 	data() {
 		return {};
 	},
 	created() {
-		this.boardStore = useBoardTestStore();
+		this.boardStore = useBoardStore();
 	},
 };
 </script>
@@ -16,3 +16,5 @@ export default {
 		<slot></slot>
 	</div>
 </template>
+
+<style scoped></style>
