@@ -473,13 +473,13 @@ export const useBoardStore = defineStore("BoardTest", {
 				if (transSquareCol1[0].length === 3) {
 					innerLockedThreesSquare.push(transSquareCol1[0]);
 				}
-				if (transSquareCol1[1].length === 3) {
+				if (transSquareCol2[0].length === 3) {
 					innerLockedThreesSquare.push(transSquareCol1[1]);
 				}
 				if (transSquareRow1[0].length === 3) {
 					innerLockedThreesSquare.push(transSquareRow1[0]);
 				}
-				if (transSquareRow2[1].length === 3) {
+				if (transSquareRow2[0].length === 3) {
 					innerLockedThreesSquare.push(transSquareRow1[1]);
 				}
 				if (innerLockedThreesSquare.length === 0) {
