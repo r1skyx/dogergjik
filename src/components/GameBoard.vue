@@ -1,11 +1,13 @@
 <template>
-	<SquareForBoard>
-		<div class="absolute w-1 h-full bg-secondary z-10"></div>
-		<div class="absolute w-full h-1 top-1/2 bg-secondary z-10"></div>
+	<div class="w-screen h-screen flex justify-center">
 		<SquareForBoard>
-			<SquareForBoard class="z-20 bg-none"></SquareForBoard>
+			<div class="absolute w-1 h-full bg-secondary z-10"></div>
+			<div class="absolute w-full h-1 top-1/2 bg-secondary z-10"></div>
+			<SquareForBoard>
+				<SquareForBoard class="z-20 bg-green-my"></SquareForBoard>
+			</SquareForBoard>
 		</SquareForBoard>
-	</SquareForBoard>
+	</div>
 </template>
 
 <script>
