@@ -204,6 +204,7 @@ export const useBoardStore = defineStore("BoardTest", {
 		...defaultState,
 		allowJumpP1: false,
 		allowJumpP2: false,
+		menuActive: false,
 	}),
 	getters: {
 		getBoard: (state) => state.board,
@@ -215,6 +216,9 @@ export const useBoardStore = defineStore("BoardTest", {
 		getPhase: (state) => state.phase,
 	},
 	actions: {
+		activateMenu() {
+			this.menuActive = !this.menuActive;
+		},
 		reset(keys) {
 			Object.assign(
 				this,
