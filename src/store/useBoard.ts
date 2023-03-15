@@ -209,7 +209,9 @@ export const useBoardStore = defineStore("BoardTest", {
 		getBoard: (state) => state.board,
 		getTurn: (state) => state.turn,
 		getNumOfTurns: (state) => state.numOfTurns,
-		getSquare: (state) => state.square,
+		getSquare: (state) => {
+			return state.square;
+		},
 		getPhase: (state) => state.phase,
 	},
 	actions: {

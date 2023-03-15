@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-	<div class="w-8 h-8 rounded-full mx-auto bg-blue-500">
+	<div class="w-4 h-4 rounded-full m-auto bg-blue-500">
 		<slot></slot>
 	</div>
 </template>

@@ -1,5 +1,8 @@
 <template>
-	<button class="w-12 h-12 rounded-full bg-secondary relative z-20">
+	<button
+		:key="$route.fullPath"
+		class="w-6 h-6 rounded-full bg-secondary relative z-20"
+	>
 		<slot></slot>
 	</button>
 </template>

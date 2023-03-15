@@ -4,9 +4,7 @@ import StartMenu from "./components/StartMenu/StartMenu.vue";
 </script>
 
 <template>
-	<div class="h-screen flex align-middle">
-		<router-view></router-view>
-	</div>
+	<router-view class="h-screen"></router-view>
 </template>
 
 <style scoped></style>

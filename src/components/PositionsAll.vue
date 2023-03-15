@@ -1,8 +1,8 @@
 <template>
 	<div class="flex flex-col justify-between h-full w-full">
 		<div
-			class="flex flex-row justify-between -m-1"
-			v-for="(item, index) in board"
+			class="flex -m-3.5 flex-row justify-between"
+			v-for="(item, index) in boardComp"
 			:key="index"
 		>
 			<PositionPlace
@@ -10,7 +10,7 @@
 				:key="index1"
 				v-show="!this.middlePiece(item2.x, item2.y)"
 				v-on:click="this.placePiece(item2.y, item2.x, this.square)"
-				class="-mx-6 -my-6"
+				class=""
 			>
 				<GamePiece
 					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square)"
@@ -47,19 +47,20 @@ export default {
 	components: { PositionPlace, GamePiece },
 	data() {
 		return {
-			boardAll: [],
-			square: 0,
+			board: [],
 			numOfTurns: "",
 			x: 0,
 			y: 0,
 			lockedThrees: [],
+			componentKey: 0,
 		};
 	},
 	computed: {
-		board() {
-			return this.boardAll[this.square];
+		boardComp() {
+			return this.board[this.square];
 		},
 	},
+
 	methods: {
 		placePiece(y, x, sq) {
 			this.boardStore.placePiece(y, x, sq);
@@ -82,34 +83,33 @@ export default {
 	},
 	created() {
 		this.boardStore = useBoardStore();
-		this.square = this.boardStore.getSquare;
-		this.boardAll = this.boardStore.board;
+		this.square = this.boardStore.square;
+		this.board = this.boardStore.board;
 		this.boardStore.incrementSquare();
+		if (this.square === 2) {
+			this.boardStore.square = 0;
+		}
 		this.watcher = this.boardStore.$subscribe(
 			() => {
 				this.numOfTurns = this.boardStore.getNumOfTurns;
 				this.lockedThrees = this.boardStore.lockedThrees;
-				this.boardAll = this.boardStore.board;
 			},
 			{ detached: false }
 		);
 	},
 	watch: {
-		numOfTurns(val, a) {
+		numOfTurns: function (val, a) {
 			if (val == 18) {
 				this.boardStore.phase = 2;
 			}
 		},
-		lockedThrees(newVal, oldVal) {
+		lockedThrees: function (newVal, oldVal) {
 			if (
 				JSON.stringify(newVal).length > JSON.stringify(oldVal).length &&
 				this.boardStore.removePieceOfPlayer === 0
 			) {
 				this.boardStore.removePieceOfPlayer = this.boardStore.turn;
 			}
-		},
-		boardAll() {
-			this.boardAll = this.boardStore.board;
 		},
 	},
 };

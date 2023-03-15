@@ -1,12 +1,13 @@
 <script>
 export default {
 	name: "StartMenu",
+	methods: {},
 };
 </script>
 
 <template>
 	<div
-		class="w-full h-full text-center flex flex-col justify-center align-middle"
+		class="w-full h-screen text-center flex flex-col justify-center align-middle"
 	>
 		<div class="flex flex-col h-1/3 justify-end mx-auto">
 			<img src="/logo.svg" class="w-24 h-auto" alt="" srcset="" />
