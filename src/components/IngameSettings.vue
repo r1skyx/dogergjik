@@ -13,6 +13,7 @@
 			<router-link to="/">Main Menu</router-link>
 		</button>
 		<button
+			v-on:click="this.reseting"
 			class="bg-green-my w-fit my-2 mx-auto px-2 rounded-md txt-secondary border border-primary"
 		>
 			End Game
@@ -21,11 +22,21 @@
 </template>
 
 <script>
+import router from "../router";
 import { useBoardStore } from "../store/useBoard";
 
 export default {
 	name: "IngameSettings",
-	methods: {},
+	data() {
+		return {};
+	},
+	methods: {
+		reseting() {
+			this.boardStore.$reset();
+			this.boardStore.activateMenu();
+			router.push("/");
+		},
+	},
 	created() {
 		this.boardStore = useBoardStore();
 	},

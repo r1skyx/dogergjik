@@ -10,11 +10,12 @@
 				:key="index1"
 				v-show="!this.middlePiece(item2.x, item2.y)"
 				v-on:click="this.placePiece(item2.y, item2.x, this.square)"
-				class=""
+				class="h-6"
 			>
 				<GamePiece
 					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square)"
 					v-show="item2.player"
+					class="flex flex-col align-middle justify-center"
 					:class="{
 						'bg-red-500': item2.player === 2,
 						'border-orange-300 border-solid border-4':
@@ -27,6 +28,7 @@
 					}"
 				>
 					<h1
+						class="h-6 text-2xl"
 						v-on:click="this.removePiece(item2.x, item2.y, this.square)"
 						v-show="this.boardStore.removePieceOfPlayer === item2.player"
 					>
@@ -102,6 +104,7 @@ export default {
 			if (val == 18) {
 				this.boardStore.phase = 2;
 			}
+			this.board = this.boardStore.board;
 		},
 		lockedThrees: function (newVal, oldVal) {
 			if (
