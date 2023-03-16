@@ -111,6 +111,7 @@ export default {
 				this.boardStore.phase = 2;
 			}
 			this.board = this.boardStore.board;
+			this.boardStore.gameOngoing = true;
 		},
 		lockedThrees: function (newVal, oldVal) {
 			if (

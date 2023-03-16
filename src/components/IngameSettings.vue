@@ -32,7 +32,9 @@ export default {
 	},
 	methods: {
 		reseting() {
-			this.boardStore.$reset();
+			setTimeout(() => {
+				this.boardStore.$reset();
+			}, 50);
 			this.boardStore.activateMenu();
 			router.push("/");
 		},
