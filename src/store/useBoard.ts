@@ -12,18 +12,21 @@ export const useBoardStore = defineStore("BoardTest", {
 			[
 				[
 					{
+						square: 0,
 						x: 0,
 						y: 0,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 0,
 						x: 1,
 						y: 0,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 0,
 						x: 2,
 						y: 0,
 						player: 0,
@@ -32,18 +35,21 @@ export const useBoardStore = defineStore("BoardTest", {
 				],
 				[
 					{
+						square: 0,
 						x: 0,
 						y: 1,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 0,
 						x: 1,
 						y: 1,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 0,
 						x: 2,
 						y: 1,
 						player: 0,
@@ -52,80 +58,21 @@ export const useBoardStore = defineStore("BoardTest", {
 				],
 				[
 					{
+						square: 0,
 						x: 0,
 						y: 2,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 0,
 						x: 1,
 						y: 2,
 						player: 0,
 						locked: "",
 					},
 					{
-						x: 2,
-						y: 2,
-						player: 0,
-						locked: "",
-					},
-				],
-			],
-			[
-				[
-					{
-						x: 0,
-						y: 0,
-						player: 0,
-						locked: "",
-					},
-					{
-						x: 1,
-						y: 0,
-						player: 0,
-						locked: "",
-					},
-					{
-						x: 2,
-						y: 0,
-						player: 0,
-						locked: "",
-					},
-				],
-				[
-					{
-						x: 0,
-						y: 1,
-						player: 0,
-						locked: "",
-					},
-					{
-						x: 1,
-						y: 1,
-						player: 0,
-						locked: "",
-					},
-					{
-						x: 2,
-						y: 1,
-						player: 0,
-						locked: "",
-					},
-				],
-				[
-					{
-						x: 0,
-						y: 2,
-						player: 0,
-						locked: "",
-					},
-					{
-						x: 1,
-						y: 2,
-						player: 0,
-						locked: "",
-					},
-					{
+						square: 0,
 						x: 2,
 						y: 2,
 						player: 0,
@@ -136,18 +83,21 @@ export const useBoardStore = defineStore("BoardTest", {
 			[
 				[
 					{
+						square: 1,
 						x: 0,
 						y: 0,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 1,
 						x: 1,
 						y: 0,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 1,
 						x: 2,
 						y: 0,
 						player: 0,
@@ -156,18 +106,21 @@ export const useBoardStore = defineStore("BoardTest", {
 				],
 				[
 					{
+						square: 1,
 						x: 0,
 						y: 1,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 1,
 						x: 1,
 						y: 1,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 1,
 						x: 2,
 						y: 1,
 						player: 0,
@@ -176,18 +129,92 @@ export const useBoardStore = defineStore("BoardTest", {
 				],
 				[
 					{
+						square: 1,
 						x: 0,
 						y: 2,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 1,
 						x: 1,
 						y: 2,
 						player: 0,
 						locked: "",
 					},
 					{
+						square: 1,
+						x: 2,
+						y: 2,
+						player: 0,
+						locked: "",
+					},
+				],
+			],
+			[
+				[
+					{
+						square: 2,
+						x: 0,
+						y: 0,
+						player: 0,
+						locked: "",
+					},
+					{
+						square: 2,
+						x: 1,
+						y: 0,
+						player: 0,
+						locked: "",
+					},
+					{
+						square: 2,
+						x: 2,
+						y: 0,
+						player: 0,
+						locked: "",
+					},
+				],
+				[
+					{
+						square: 2,
+						x: 0,
+						y: 1,
+						player: 0,
+						locked: "",
+					},
+					{
+						square: 2,
+						x: 1,
+						y: 1,
+						player: 0,
+						locked: "",
+					},
+					{
+						square: 2,
+						x: 2,
+						y: 1,
+						player: 0,
+						locked: "",
+					},
+				],
+				[
+					{
+						square: 2,
+						x: 0,
+						y: 2,
+						player: 0,
+						locked: "",
+					},
+					{
+						square: 2,
+						x: 1,
+						y: 2,
+						player: 0,
+						locked: "",
+					},
+					{
+						square: 2,
 						x: 2,
 						y: 2,
 						player: 0,
@@ -499,6 +526,9 @@ export const useBoardStore = defineStore("BoardTest", {
 		},
 		compareArrays(a, b) {
 			return JSON.stringify(a) === JSON.stringify(b);
+		},
+		includedInArray(a, b) {
+			return JSON.stringify(b).includes(JSON.stringify(a));
 		},
 		checkForThreePiecesLeft(board) {
 			if (this.phase !== 2) {

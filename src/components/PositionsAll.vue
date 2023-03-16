@@ -31,6 +31,12 @@
 						class="h-6 text-2xl"
 						v-on:click="this.removePiece(item2.x, item2.y, this.square)"
 						v-show="this.boardStore.removePieceOfPlayer === item2.player"
+						v-if="
+							!this.boardStore.includedInArray(
+								this.boardComp[item2.y][item2.x],
+								this.boardStore.lockedThrees
+							)
+						"
 					>
 						X
 					</h1>
