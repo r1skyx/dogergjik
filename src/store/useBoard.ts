@@ -205,6 +205,7 @@ export const useBoardStore = defineStore("BoardTest", {
 		allowJumpP1: false,
 		allowJumpP2: false,
 		menuActive: false,
+		gameOngoing: false,
 	}),
 	getters: {
 		getBoard: (state) => state.board,
