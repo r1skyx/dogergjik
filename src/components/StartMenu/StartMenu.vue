@@ -32,11 +32,13 @@ export default {
 					Play
 				</button></router-link
 			>
-			<button
-				class="h-12 w-48 mx-auto bg-primary rounded-2xl text-white text-2xl"
-			>
-				How to play
-			</button>
+			<router-link to="how-to">
+				<button
+					class="h-12 w-48 mx-auto bg-primary rounded-2xl text-white text-2xl"
+				>
+					How to play
+				</button>
+			</router-link>
 		</div>
 	</div>
 </template>

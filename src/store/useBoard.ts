@@ -536,7 +536,7 @@ export const useBoardStore = defineStore("BoardTest", {
 			return JSON.stringify(b).includes(JSON.stringify(a));
 		},
 		checkForThreePiecesLeft(board) {
-			if (this.phase !== 2) {
+			if (this.phase === 1) {
 			} else {
 				let numOfPiecesInPlay1 = 0;
 				let numOfPiecesInPlay2 = 0;
@@ -561,10 +561,12 @@ export const useBoardStore = defineStore("BoardTest", {
 				}
 				if (numOfPiecesInPlay1 === 3) {
 					this.allowJumpP1 = true;
+					this.phase = 3;
 				} else if (numOfPiecesInPlay1 < 3) {
 					this.winner = 2;
 				}
 				if (numOfPiecesInPlay2 === 3) {
+					this.phase = 3;
 					this.allowJumpP2 = true;
 				} else if (numOfPiecesInPlay2 < 3) {
 					this.winner = 1;

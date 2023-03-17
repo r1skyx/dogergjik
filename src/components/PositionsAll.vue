@@ -108,8 +108,12 @@ export default {
 		},
 		selectPieceToJump(x, y, square, player) {
 			if (
-				(this.boardStore.allowJumpP1 === true && player === 1) ||
-				(this.boardStore.allowJumpP2 === true && player === 2)
+				(this.boardStore.allowJumpP1 === true &&
+					player === 1 &&
+					this.boardStore.turn === 1) ||
+				(this.boardStore.allowJumpP2 === true &&
+					player === 2 &&
+					this.boardStore.turn === 2)
 			) {
 				this.boardStore.selectPieceToJump(x, y, square);
 			}
