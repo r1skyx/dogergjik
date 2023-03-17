@@ -233,6 +233,8 @@ export const useBoardStore = defineStore("BoardTest", {
 		allowJumpP2: false,
 		menuActive: false,
 		gameOngoing: false,
+		selected: "",
+		winner: "",
 	}),
 	getters: {
 		getBoard: (state) => state.board,
@@ -270,7 +272,7 @@ export const useBoardStore = defineStore("BoardTest", {
 		placePiece(y, x, sq) {
 			if (
 				this.removePieceOfPlayer !== 0 ||
-				this.getPhase !== 1 ||
+				(this.getPhase !== 1 && this.selected === "") ||
 				this.board[sq][y][x].player !== 0
 			) {
 			} else {
@@ -410,7 +412,10 @@ export const useBoardStore = defineStore("BoardTest", {
 				}
 			};
 		},
-
+		selectPieceToJump(x, y, square) {
+			let selected = this.board[square][y][x];
+			this.selected = selected;
+		},
 		checkForThreeRowColInSquares(board) {
 			let innerLockedThreesSquare = [];
 			let innerLockedAllSquares = [];
@@ -556,9 +561,13 @@ export const useBoardStore = defineStore("BoardTest", {
 				}
 				if (numOfPiecesInPlay1 === 3) {
 					this.allowJumpP1 = true;
+				} else if (numOfPiecesInPlay1 < 3) {
+					this.winner = 2;
 				}
 				if (numOfPiecesInPlay2 === 3) {
 					this.allowJumpP2 = true;
+				} else if (numOfPiecesInPlay2 < 3) {
+					this.winner = 1;
 				}
 			}
 		},
