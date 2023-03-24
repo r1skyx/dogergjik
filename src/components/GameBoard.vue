@@ -1,5 +1,5 @@
 <template>
-	<div class="w-11/12 m-auto flex flex-row justify-center relative">
+	<div class="w-9/12 m-auto flex flex-row justify-center relative">
 		<div class="absolute w-1 h-full bg-secondary z-10"></div>
 		<div class="absolute w-10/12 h-1 top-1/2 -m-0.5 bg-secondary z-10"></div>
 		<SquareForBoard>

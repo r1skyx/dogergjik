@@ -8,7 +8,7 @@
 			class="w-2/3 h-screen text-center flex flex-col justify-center m-auto"
 		>
 			<h2 class="text-2xl mb-2 txt-primary">Phase 1: Placing pieces</h2>
-			<p>
+			<p class="text-sm">
 				The game begins with an empty board. The players determine who plays
 				first, then take turns placing their men one per play on empty points.
 				If a player is able to place three of their pieces on contiguous points
@@ -24,7 +24,7 @@
 			class="w-2/3 h-screen text-center flex flex-col justify-center m-auto"
 		>
 			<h2 class="text-2xl mb-2 txt-primary">Phase 2: Moving pieces</h2>
-			<p>
+			<p class="text-sm">
 				Players continue to alternate moves, this time moving a man to an
 				adjacent point. A piece may not "jump" another piece. Players continue
 				to try to form mills and remove their opponent's pieces as in phase one.
@@ -41,7 +41,7 @@
 			class="w-2/3 h-screen text-center flex flex-col justify-center m-auto"
 		>
 			<h2 class="text-2xl mb-2 txt-primary">Phase 3: "Flying"</h2>
-			<p>
+			<p class="text-sm">
 				When a player is reduced to three pieces, there is no longer a
 				limitation on that player of moving to only adjacent points: The
 				player's men may "fly" (or "hop",or "jump") from any point to any vacant
@@ -52,11 +52,11 @@
 				is one man away from losing the game.
 			</p>
 		</div>
-		<div class="absolute bottom-5 right-1/2 w-fit">
+		<div class="absolute bottom-5 left-1/2 transform -translate-x-1/2">
 			<button @click="this.page === 1 ? 0 : this.page--">
 				<font-awesome-icon
 					:class="{ ' text-gray-400': page === 1 }"
-					class="text-lg mr-1"
+					class="text-lg"
 					icon="fa-solid fa-circle-chevron-left"
 				/>
 			</button>

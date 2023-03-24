@@ -3,7 +3,7 @@
 		<h1 class="text-2xl txt-primary">Phase {{ phase }}</h1>
 		<img
 			@click="this.boardStore.activateMenu"
-			src="gears.svg"
+			src="/gears.svg"
 			alt=""
 			srcset=""
 		/>
