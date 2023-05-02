@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
+
 library.add(fas);
 import "./index.css";
 import Vue3TouchEvents from "vue3-touch-events";

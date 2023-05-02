@@ -4,13 +4,13 @@
 	>
 		<h1 class="text-2xl text-center m-auto txt-primary">We got a winner!</h1>
 		<h1 class="text-2xl text-center m-auto txt-primary">
-			Player {{ boardStore.winner }} wins
+			Lojtari {{ boardStore.winner }} fiton!
 		</h1>
 		<button
 			v-on:click="this.reseting"
 			class="bg-green-my w-fit my-2 mx-auto px-2 rounded-md txt-secondary border border-primary"
 		>
-			End Game
+			kryje lojën
 		</button>
 	</div>
 </template>

@@ -1,0 +1,12 @@
+{
+	"appId": "com.dogergjik",
+	"appName": "dogergjik",
+	"webDir": "dist",
+	"bundledWebRuntime": false,
+
+	"plugins": {
+		"cordova-plugin-media": {
+			"version": "6.1.0"
+		}
+	}
+}
