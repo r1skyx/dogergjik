@@ -10,7 +10,7 @@
 				:key="index1"
 				v-show="!this.middlePiece(item2.x, item2.y)"
 				v-on:click="this.placePiece(item2.y, item2.x, this.square)"
-				class="h-6"
+				class="h-6 absolute"
 			>
 				<GamePiece
 					@click="
@@ -18,9 +18,9 @@
 					"
 					v-touch:swipe="this.movePiece(item2.x, item2.y, this.square)"
 					v-show="item2.player"
-					class="flex flex-col align-middle justify-center"
+					class="relative"
 					:class="{
-						'bg-red-500': item2.player === 2,
+						'bg-yellow-500': item2.player === 2,
 						'border-orange-300 border-solid border-4':
 							(!this.boardStore.removePieceOfPlayer &&
 								this.boardStore.allowJumpP2 &&

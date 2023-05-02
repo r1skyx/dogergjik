@@ -6,17 +6,17 @@
 			@click="this.boardStore.activateMenu"
 			class="w-fit mx-auto px-2 rounded-md bg-primary txt-secondary my-2"
 		>
-			Return
+			kthehu n'loj
 		</button>
 
 		<button class="txt-primary my-2">
-			<router-link to="/">Main Menu</router-link>
+			<router-link to="/">menyja kryesore</router-link>
 		</button>
 		<button
 			v-on:click="this.reseting"
 			class="bg-green-my w-fit my-2 mx-auto px-2 rounded-md txt-secondary border border-primary"
 		>
-			End Game
+			kryje lojën
 		</button>
 	</div>
 </template>

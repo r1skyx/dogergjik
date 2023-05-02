@@ -13,7 +13,7 @@ export default {
 
 <template>
 	<div
-		class="w-5/6 aspect-[5/3] bg-none border-secondary border-4 align-middle flex justify-center my-auto box-border relative"
+		class="w-5/6 aspect-[5/3] bg-none border-primary border-4 align-middle flex justify-center my-auto box-border relative"
 	>
 		<PositionsAll class="w-full absolute"></PositionsAll>
 		<slot></slot>

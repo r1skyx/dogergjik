@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Neucha&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
 /* ./src/index.css */
 @tailwind base;
@@ -7,13 +7,13 @@
 /* COLORS */
 
 :root {
-	--primary: #d4a373;
-	--secondary: #fefae0;
-	--green: #ccd5ae;
+	--primary: #000;
+	--secondary: #f3d0bd;
+	--green: #b40f20;
 }
 
 * {
-	font-family: "Neucha", cursive;
+	font-family: "Permanent Marker", cursive;
 }
 
 html {

@@ -14,30 +14,30 @@ export default {
 	<div
 		class="w-full h-screen text-center flex flex-col justify-center align-middle"
 	>
+		<img
+			src="@/assets/old-people-art.png"
+			class="w-1/5 absolute right-10 top-6"
+			alt=""
+			srcset=""
+		/>
+		<img
+			src="@/assets/bac-u-kry.png"
+			class="h-1/2 absolute left-6 bottom-6"
+			alt=""
+			srcset=""
+		/>
 		<div class="flex flex-col h-1/3 justify-end mx-auto">
-			<img src="/logo.svg" class="w-24 h-auto" alt="" srcset="" />
+			<h1 class="w-auto text-5xl">dogërgjik</h1>
 		</div>
-		<div class="flex flex-col h-1/2 justify-evenly">
+		<div class="flex flex-col h-1/2 justify-center">
 			<router-link v-show="this.boardStore.gameOngoing" to="board"
-				><button
-					class="h-12 w-48 mx-auto bg-secondary rounded-2xl border-primary-dashed text-2xl txt-primary"
-				>
-					Continue
-				</button></router-link
+				><h1 class="text-3xl text-white">-vazhdoje lojën-</h1></router-link
 			>
 			<router-link to="board"
-				><button
-					class="h-12 w-48 mx-auto bg-secondary rounded-2xl border-primary-dashed text-2xl txt-primary"
-				>
-					Play
-				</button></router-link
+				><h1 class="text-3xl text-white">-nisja lojës t're-</h1></router-link
 			>
 			<router-link to="how-to">
-				<button
-					class="h-12 w-48 mx-auto bg-primary rounded-2xl text-white text-2xl"
-				>
-					How to play
-				</button>
+				<h1 class="text-3xl txt-secondary">=çysh luhet=</h1>
 			</router-link>
 		</div>
 	</div>
