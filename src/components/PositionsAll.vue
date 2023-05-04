@@ -40,7 +40,7 @@
 					}"
 				>
 					<h1
-						class="h-6 text-2xl"
+						class="h-6 text-2xl absolute -mt-2"
 						v-on:click="this.removePiece(item2.x, item2.y, this.square)"
 						v-show="this.boardStore.removePieceOfPlayer === item2.player"
 						v-if="

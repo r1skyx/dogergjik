@@ -1,12 +1,15 @@
 <script>
 import { useBoardStore } from "../../store/useBoard";
-
+import MusicButton from "../MusicButton.vue";
 export default {
 	name: "StartMenu",
-	methods: {},
+	data() {
+		return {};
+	},
 	created() {
 		this.boardStore = useBoardStore();
 	},
+	components: { MusicButton },
 };
 </script>
 
@@ -14,6 +17,7 @@ export default {
 	<div
 		class="w-full h-screen text-center flex flex-col justify-center align-middle"
 	>
+		<!-- <music-button class="ml-8"></music-button> -->
 		<img
 			src="@/assets/old-people-art.png"
 			class="w-1/5 absolute right-10 top-6"
@@ -35,11 +39,11 @@ export default {
 					-vazhdoje lojën-
 				</h1></router-link
 			>
-			<router-link to="board"
-				><h1 class="text-3xl text-white max-w-fit mx-auto text-center">
+			<router-link to="board">
+				<h1 class="text-3xl text-white max-w-fit mx-auto text-center">
 					-nisja lojës t're-
-				</h1></router-link
-			>
+				</h1>
+			</router-link>
 			<router-link to="how-to">
 				<h1 class="text-3xl txt-secondary max-w-fit mx-auto text-center">
 					=çysh luhet=
